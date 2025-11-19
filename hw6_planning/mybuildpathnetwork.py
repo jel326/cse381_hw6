@@ -27,6 +27,18 @@ from core import *
 def myBuildPathNetwork(pathnodes, world, agent = None):
 	lines = []
 	### YOUR CODE GOES BELOW HERE ###
+	worldLines = world.getLinesWithoutBorders()
+ 
+	for i in range(len(pathnodes)):
+		for j in range(i + 1, len(pathnodes)):
+			node1 = pathnodes[i]
+			node2 = pathnodes[j]
+			
+			#Note: raytraceworld performs a ray trace against every line in worldlines and returns teh first intersecting point
+			#If an intersection is found between teh two points that should mean an obstacle is present in the middle
+			intersection = rayTraceWorldNoEndPoints(node1, node2, worldLines)
+			if intersection == None:
+				lines.append((node1, node2))
 
 	### YOUR CODE GOES ABOVE HERE ###
 	return lines
